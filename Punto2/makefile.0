@@ -1,0 +1,66 @@
+all :  simpletico.png rk4.png Zoom_1_rk4.png Zoom_2_rk4.png Zoom_2_Simpletico.png Zoom_1_Simpletico.png simpletico_04325.png simpletico_046.png simpletico_0425.png
+# no se crea el archivo all
+
+simpletico_046.png : simpletico.dat plot.py rk4.dat simpletico2.dat simpletico3.dat simpletico4.dat
+	python plot.py
+
+simpletico_0425.png : simpletico.dat plot.py rk4.dat simpletico2.dat simpletico3.dat simpletico4.dat
+	python plot.py
+
+simpletico_04325.png : simpletico.dat plot.py rk4.dat simpletico2.dat simpletico3.dat simpletico4.dat
+	python plot.py
+
+Zoom_2_Simpletico.png : simpletico.dat plot.py rk4.dat simpletico2.dat simpletico3.dat simpletico4.dat
+	python plot.py
+
+Zoom_1_Simpletico.png : simpletico.dat plot.py rk4.dat simpletico2.dat simpletico3.dat simpletico4.dat
+	python plot.py
+
+Zoom_2_rk4.png : simpletico.dat plot.py rk4.dat simpletico2.dat simpletico3.dat simpletico4.dat
+	python plot.py
+
+Zoom_1_rk4.png : simpletico.dat plot.py rk4.dat simpletico2.dat simpletico3.dat simpletico4.dat
+	python plot.py
+
+simpletico.png : simpletico.dat plot.py rk4.dat simpletico2.dat simpletico3.dat simpletico4.dat
+	python plot.py
+
+rk4.png : simpletico.dat plot.py rk4.dat simpletico2.dat simpletico3.dat simpletico4.dat
+	python plot.py
+
+#plot
+
+proceso_rk4.x : rk4_2.c
+	  cc rk4_2.c -o proceso_rk4.x
+
+proceso_simp.x : simpletic.c
+	  cc simpletic.c -o proceso_simp.x
+
+proceso_simp2.x : simpletic2.c
+	  cc simpletic2.c -o proceso_simp2.x
+
+simpletico2.dat : proceso_simp2.x
+	./proceso_simp2.x > simpletico2.dat
+
+rk4.dat : proceso_rk4.x
+	./proceso_rk4.x > rk4.dat
+
+simpletico.dat : proceso_simp.x
+	./proceso_simp.x > simpletico.dat
+
+proceso_simp3.x : simpletic3.c
+	  cc simpletic3.c -o proceso_simp3.x
+
+simpletico3.dat : proceso_simp3.x
+	./proceso_simp3.x > simpletico3.dat
+
+proceso_simp4.x : simpletic4.c
+	  cc simpletic4.c -o proceso_simp4.x
+
+simpletico4.dat : proceso_simp4.x
+	./proceso_simp4.x > simpletico4.dat
+
+clean:
+	rm -f numeros.x lineas_*.txt numeros.txt lineas.txt
+
+
